@@ -1,0 +1,4 @@
+require 'rake'
+
+# Hard-code path to staticmatic for testing
+require '../../../lib/tasks/staticmatic'

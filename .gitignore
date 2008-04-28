@@ -1,0 +1,5 @@
+.DS_Store
+*.gem
+spec/fixtures/sample/site/*.html
+spec/fixtures/sample/site/services
+spec/fixtures/sample/site/stylesheets/*
