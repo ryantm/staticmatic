@@ -28,17 +28,17 @@ describe StaticMatic::Base do
   end
   
   it "should register a css renderer" do
-    output = @staticmatic.render("stylesheets/application.css")
+    output = @staticmatic.render("stylesheets/site.css")
     output.should match(/body \{/)
     output.should match(/font\-family\: verdana/)
   end
   
   it "should setup up css type correctly" do
-    @staticmatic.determine_format_for("stylesheets/application.css").should == :css
+    @staticmatic.determine_format_for("stylesheets/site.css").should == :css
   end
   
   it "should determine format for fille with extension" do
-    @staticmatic.determine_format_for("stylesheets/application.css.sass").should == :css
+    @staticmatic.determine_format_for("stylesheets/site.css.sass").should == :css
   end
   
   it "should render index template from sub-directory" do

@@ -17,14 +17,14 @@ describe StaticMatic::Base do
   end
   
   it "should determine template directory for file" do
-    @staticmatic.template_directory_for("stylesheets/application.css").should == ""
+    @staticmatic.template_directory_for("stylesheets/site.css").should == ""
     @staticmatic.template_directory_for("hello_world.html").should == "pages"
     @staticmatic.template_directory_for("haml_test").should == "pages"    
   end
   
   it "should know if we can render a template or not" do
     @staticmatic.can_render?("hello_world.html").should be_true
-    @staticmatic.can_render?("stylesheets/application.css").should be_true
+    @staticmatic.can_render?("stylesheets/site.css").should be_true
   end
   
   it "should add index if needed" do

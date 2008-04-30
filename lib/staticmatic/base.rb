@@ -44,7 +44,7 @@ module StaticMatic
     def render_with_layout(template)
       content_for_layout = render(template)
       @template.instance_variable_set("@content_for_layout", content_for_layout)
-      render("layouts/application")
+      render("layouts/site")
     end
     
     # Load all helpers from src/helpers/
@@ -116,16 +116,6 @@ module StaticMatic
     # Full path to a template, relative to src/
     def full_template_path(template)
       add_index_if_needed(File.join(template_directory_for(template), template))
-    end
-    
-    class << self
-      # Defined to keep ActionView happy
-      def controller_name
-        "pages"
-      end
-      
-      def controller_path
-      end
     end
   end
 end
