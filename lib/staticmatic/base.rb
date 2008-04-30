@@ -26,6 +26,7 @@ module StaticMatic
 
     def initialize_template
       @template = ActionView::Base.new(@src_dir, {}, self)
+      @template.template_format = :html
     end
     
     def render(template, options = {})
@@ -120,7 +121,10 @@ module StaticMatic
     class << self
       # Defined to keep ActionView happy
       def controller_name
-        ""
+        "pages"
+      end
+      
+      def controller_path
       end
     end
   end
