@@ -2,6 +2,11 @@ module StaticMatic
   module DeprecatedHelpers
     def stylesheets(*params)
       deprecate :alt => "stylesheet_link_tag"
+      
+      if params.size == 0
+        
+      end
+      
       stylesheet_link_tag(*params)
     end
     

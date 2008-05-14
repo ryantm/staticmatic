@@ -32,7 +32,9 @@ module StaticMatic
     def render(template, options = {})
       @template.template_format = determine_format_for(template)
       template = strip_extension(template)
-
+      
+      @template.instance_variable_set("@current_page", template)
+      
       begin
         @template.render_file(full_template_path(template), true)
       rescue Exception => e

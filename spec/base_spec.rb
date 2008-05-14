@@ -34,4 +34,5 @@ describe StaticMatic::Base do
   it "should determine layout based on existing file" do
     @staticmatic.determine_default_layout.should == "site"
   end
+
 end
