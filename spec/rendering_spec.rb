@@ -37,8 +37,13 @@ describe StaticMatic::Base do
     @staticmatic.determine_format_for("stylesheets/site.css").should == :css
   end
   
-  it "should determine format for fille with extension" do
+  it "should determine format for file with extension" do
     @staticmatic.determine_format_for("stylesheets/site.css.sass").should == :css
+  end
+  
+  it "should have sensible defaults for haml & sass" do
+    @staticmatic.determine_format_for("stylesheets/site.sass").should == :css
+    @staticmatic.determine_format_for("pages/test.haml").should == :html
   end
   
   it "should render index template from sub-directory" do

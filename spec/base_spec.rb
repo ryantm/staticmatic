@@ -30,4 +30,8 @@ describe StaticMatic::Base do
   it "should add index if needed" do
     @staticmatic.add_index_if_needed(@staticmatic.full_template_path("services")).should == "pages/services/index"
   end
+  
+  it "should determine layout based on existing file" do
+    @staticmatic.determine_default_layout.should == "site"
+  end
 end

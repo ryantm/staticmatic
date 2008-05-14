@@ -44,7 +44,14 @@ module StaticMatic
     def render_with_layout(template)
       content_for_layout = render(template)
       @template.instance_variable_set("@content_for_layout", content_for_layout)
-      render("layouts/site")
+      
+      layout = @template.instance_variable_get("@layout")
+      
+      if !layout
+        layout = determine_default_layout
+      end
+      
+      render("layouts/#{layout}")
     end
     
     # Load all helpers from src/helpers/
@@ -77,16 +84,38 @@ module StaticMatic
     # For example: application.css.sass -> :css
     #
     def determine_format_for(template)
-
+       
       ext_matches = template.match /\.([a-z0-9]+)/
-
-      extension = :html
       
+      # For templates that have only handler extensions, default for backwards compatibility
       if ext_matches
-        extension = ext_matches[1].to_sym
+        if !template.match(/\.([a-z0-9]+)\./)
+
+          case ext_matches[1]
+          when "sass"
+            extension = :css
+          when "haml"
+            extension = :html
+          end
+        end
+        
+        extension = ext_matches[1].to_sym if !extension
+      else
+        extension = :html
       end
+      
       extension
     end 
+    
+    def determine_default_layout
+      layout = "site"
+      Dir["#{@src_dir}/layouts/*"].each do |layout_file|
+        if layout_file.match /\.application/
+          layout = "application"
+        end
+      end
+      layout 
+    end
     
     # Remove the extension from a given template path
     def strip_extension(template)
