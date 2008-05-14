@@ -1,8 +1,8 @@
 module StaticMatic
   module DeprecatedHelpers
     def stylesheets(*params)
-      deprecate :alt => "stylesheets_link_tag"
-      stylesheets_link_tag(*params)
+      deprecate :alt => "stylesheet_link_tag"
+      stylesheet_link_tag(*params)
     end
     
     def link(title, href = "", options = {})
