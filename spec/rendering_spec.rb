@@ -55,4 +55,9 @@ describe StaticMatic::Base do
     output = @staticmatic.render("services/web_development")
     output.should match(/Web Development/)
   end
+  
+  it "should render with layout specified in template" do
+    output = @staticmatic.render_with_layout("specify_layout")
+    output.should match(/This is a Specified Layout/)
+  end
 end

@@ -109,8 +109,10 @@ module StaticMatic
     
     def determine_default_layout
       layout = "site"
-      Dir["#{@src_dir}/layouts/*"].each do |layout_file|
-        if layout_file.match /\.application/
+      
+      Dir["#{@src_dir}/layouts/**"].each do |layout_file|
+
+        if layout_file.match /application/
           layout = "application"
         end
       end
