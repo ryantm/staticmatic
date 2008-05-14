@@ -27,6 +27,7 @@ module StaticMatic
     def initialize_template
       @template = ActionView::Base.new(@src_dir, {}, self)
       @template.template_format = :html
+      @template.instance_variable_set("@staticmatic", self)
     end
     
     def render(template, options = {})
@@ -38,7 +39,7 @@ module StaticMatic
       begin
         @template.render_file(full_template_path(template), true)
       rescue Exception => e
-        rescue_from_error(e)
+        rescue_from_error(e)        
       end
     end
     
@@ -48,6 +49,9 @@ module StaticMatic
       @template.instance_variable_set("@content_for_layout", content_for_layout)
       
       layout = @template.instance_variable_get("@layout")
+      
+      # Clean @layout variable for next request
+      @template.instance_variable_set("@layout", nil)
       
       if !layout
         layout = determine_default_layout

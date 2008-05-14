@@ -9,7 +9,7 @@ module StaticMatic
         message << %Q{ Please use "#{options[:alt]}" instead }
       end
       
-      logger.warn(message)
+      #logger.warn(message)
     end
     
     private

@@ -7,7 +7,7 @@ require 'haml'
 require 'sass'
 require 'mongrel'
 
-["base", "rescue", "previewer", "builder", "template_handlers/sass", "deprecation", "helpers/deprecated_helpers", "helpers/asset_tag_helper", "helpers/page_helper", "helpers/url_helper"].each do |file|
+["base", "rescue", "previewer", "builder", "template_handlers/sass", "deprecation", "helpers/deprecated_helpers", "helpers/asset_tag_helper", "helpers/page_helper", "helpers/url_helper", "actionpack_support/mime"].each do |file|
   require File.dirname(__FILE__) + "/staticmatic/#{file}"
 end
 
@@ -17,12 +17,16 @@ StaticMatic::Base.class_eval do
 end
 
 ActionView::Base.class_eval do
+  include Mime
   include StaticMatic::DeprecatedHelpers
   include StaticMatic::Deprecation
   include StaticMatic::AssetTagHelper  
   include StaticMatic::PageHelper  
   include StaticMatic::UrlHelper
+
 end
+
+
 
 # TODO: Replace with a correct template registration
 Haml.init_rails(binding) # ActionView::Base.register_template_handler(:haml, Haml::Template)

@@ -9,7 +9,12 @@ describe StaticMatic::Base do
 
   it "should catch any template errors" do
     output = @staticmatic.render("page_with_error")
-    output.match(/Illegal Indentation/)
+    output.should match(/Illegal Indentation/)
+  end
+  
+  it "should still render correctly after an error occured" do
+    output = @staticmatic.render("page_with_error")
+    @staticmatic.render("hello_world").should match(/Hello world!/)
   end
   
   it "should load custom helpers" do

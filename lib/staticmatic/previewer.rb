@@ -20,16 +20,23 @@ module StaticMatic
       file_name = CGI::unescape(file_name)
       file_name.gsub!(/^\//, '')
 
-      if @staticmatic.can_render? path_info
+      if file_ext && file_ext.match(/html|css/)
         response.start(200) do |head, out|
           head["Content-Type"] = "text/#{file_ext}"
 
           output = ""
-    
-          if file_ext == "css"
-            output = @staticmatic.render(path_info)
+          if @staticmatic.can_render? path_info
+            if file_ext == "css"
+              output = @staticmatic.render(path_info)
+            else
+              output = @staticmatic.render_with_layout(file_name)
+            end
           else
-            output = @staticmatic.render_with_layout(file_name)
+            if @files.can_serve(path_info)
+              @files.process(request,response)
+            else
+              output = "File not Found"
+            end
           end
           out.write output
         end
