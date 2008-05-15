@@ -34,8 +34,6 @@ module StaticMatic
       @template.template_format = determine_format_for(template)
       template = strip_extension(template)
       
-      @template.instance_variable_set("@current_page", template)
-      
       begin
         @template.render_file(full_template_path(template), true)
       rescue Exception => e
@@ -46,6 +44,7 @@ module StaticMatic
     # Render the given template within the current layout
     def render_with_layout(template)
       content_for_layout = render(template)
+      @template.instance_variable_set("@current_page", template)
       @template.instance_variable_set("@content_for_layout", content_for_layout)
       
       layout = @template.instance_variable_get("@layout")
