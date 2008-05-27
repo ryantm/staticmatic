@@ -16,9 +16,9 @@ describe "Asset Helpers" do
   end
   
   it "should generate stylesheet link" do
-    @staticmatic.template.instance_variable_set('@current_page', 'services/web_development/costs')
+    @relative_path_to_root = @staticmatic.calculate_relative_path_to_root('pages/services/web_development/costs')
     output = stylesheet_link_tag("site")
-    expected = "../../../stylesheets/site.css"
+    expected = "../../stylesheets/site.css"
     output.should match(/#{expected}/)
   end
 end

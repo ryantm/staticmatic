@@ -43,7 +43,9 @@ module StaticMatic
     
     # Render the given template within the current layout
     def render_with_layout(template)
+      @template.instance_variable_set("@relative_path_to_root", "#{calculate_relative_path_to_root(full_template_path(template))}")
       content_for_layout = render(template)
+      
       @template.instance_variable_set("@current_page", template)
       @template.instance_variable_set("@content_for_layout", content_for_layout)
       
@@ -154,10 +156,9 @@ module StaticMatic
       add_index_if_needed(File.join(template_directory_for(template), template))
     end
     
-    def relative_path_to_root(current_path = nil)
-      current_page = @template.instance_variable_get("@current_page")
-      if current_path.nil? || current_path.match(/^((\.\.?)?\/|\#|.+?\:)/) == nil
-        current_page_depth = current_page.split('/').length - 1;
+    def calculate_relative_path_to_root(template)
+      if template.match(/^((\.\.?)?\/|\#|.+?\:)/) == nil
+        current_page_depth = template.split('/').length - 2;
         (current_page_depth > 0) ? ([ '..' ] * current_page_depth).join('/') + '/' : ''
       else
         ''
