@@ -45,7 +45,6 @@ module StaticMatic
       if File.exists? build_file
 
         template_path = @staticmatic.template.full_template_path(path, @staticmatic.template.pick_template_extension(path))
-        
         #file_changed? template_path, build_file
         true
       else
