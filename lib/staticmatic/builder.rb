@@ -46,15 +46,20 @@ module StaticMatic
 
         template_path = @staticmatic.template.full_template_path(path, @staticmatic.template.pick_template_extension(path))
         
-        build_modification_time = File.stat(build_file).mtime.strftime("%Y%m%d%H%M%s")
-        template_modification_time = File.stat(template_path).mtime.strftime("%Y%m%d%H%M%s")
-        if template_modification_time > build_modification_time
-          true
-        else
-          false
-        end
+        #file_changed? template_path, build_file
+        true
       else
         true
+      end
+    end
+    
+    def file_changed?(src_file, build_file)
+      build_modification_time = File.stat(build_file).mtime.strftime("%Y%m%d%H%M%s")
+      template_modification_time = File.stat(src_file).mtime.strftime("%Y%m%d%H%M%s")
+      if template_modification_time > build_modification_time
+        true
+      else
+        false
       end
     end
     
