@@ -40,4 +40,11 @@ describe StaticMatic::Base do
     @staticmatic.determine_default_layout.should == "site"
   end
 
+  it "should know the relative path to the base dir" do 
+    @staticmatic.template.instance_variable_set('@current_page', 'services/web_development/costs')
+    @staticmatic.relative_path_to_root.should == "../../"
+    
+    @staticmatic.template.instance_variable_set('@current_page', 'services/web_development')
+    @staticmatic.relative_path_to_root.should == "../"
+  end
 end

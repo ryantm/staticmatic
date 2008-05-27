@@ -153,5 +153,15 @@ module StaticMatic
     def full_template_path(template)
       add_index_if_needed(File.join(template_directory_for(template), template))
     end
+    
+    def relative_path_to_root(current_path = nil)
+      current_page = @template.instance_variable_get("@current_page")
+      if current_path.nil? || current_path.match(/^((\.\.?)?\/|\#|.+?\:)/) == nil
+        current_page_depth = current_page.split('/').length - 1;
+        (current_page_depth > 0) ? ([ '..' ] * current_page_depth).join('/') + '/' : ''
+      else
+        ''
+      end
+    end    
   end
 end
