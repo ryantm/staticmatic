@@ -9,7 +9,7 @@ describe StaticMatic::Base do
 
   it "should catch any template errors" do
     output = @staticmatic.render("page_with_error")
-    output.should match(/Illegal Indentation/)
+    output.should match(/Haml must be indented using two spaces/)
   end
   
   it "should still render correctly after an error occured" do
@@ -28,8 +28,8 @@ describe StaticMatic::Base do
   end
   
   it "should know if we can render a template or not" do
-    @staticmatic.can_render?("hello_world.html").should be_true
-    @staticmatic.can_render?("stylesheets/site.css").should be_true
+    @staticmatic.can_render?("hello_world.html").should_not be_false
+    @staticmatic.can_render?("stylesheets/site.css").should_not be_false
   end
   
   it "should add index if needed" do

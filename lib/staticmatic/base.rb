@@ -25,8 +25,9 @@ module StaticMatic
     end
 
     def initialize_template
-      @template = ActionView::Base.new(@src_dir, {}, self)
+      @template = ActionView::Base.new([], {}, self)
       @template.template_format = :html
+      @template.finder.view_paths = [@src_dir]
       @template.instance_variable_set("@staticmatic", self)
     end
     
@@ -137,7 +138,7 @@ module StaticMatic
     def can_render?(template)
       @template.template_format = determine_format_for(template)
       template = strip_extension(template)
-      @template.file_exists?(full_template_path(template))
+      @template.finder.file_exists?(full_template_path(template))
     end
     
     # Adds 'index' to a given template path if the path is a directory

@@ -34,5 +34,5 @@ end
 # TODO: Replace with a correct template registration
 Haml.init_rails(binding) # ActionView::Base.register_template_handler(:haml, Haml::Template)
 
-ActionView::Base.register_template_handler :sass, StaticMatic::TemplateHandlers::Sass
+ActionView::Template.register_template_handler :sass, StaticMatic::TemplateHandlers::Sass
 
