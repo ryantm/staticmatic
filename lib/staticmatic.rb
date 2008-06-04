@@ -14,7 +14,7 @@ require 'mongrel'
   require "#{lib_path}/staticmatic/#{file}"
 end
 
-Dir["#{lib_path}/staticmatic/helpers/*"].each do |file|
+Dir["#{lib_path}/staticmatic/helpers/*_helper.rb","#{lib_path}/staticmatic/helpers/*_helpers.rb" ].each do |file|
   require file
   module_name = "StaticMatic::Helpers::" + file.match(/([a-z_]+)\.rb$/)[1].camelize
   ActionView::Base.class_eval { include module_name.constantize }
@@ -27,6 +27,7 @@ end
 
 ActionView::Base.class_eval do
   include Mime
+  include StaticMatic::Deprecation
 end
 
 
