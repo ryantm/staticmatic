@@ -52,7 +52,7 @@ module StaticMatic
       # Starts the StaticMatic preview server
       def start(staticmatic)
         port = "3000"
-        config = Mongrel::Configurator.new  do
+        config = Mongrel::Configurator.new do
           puts "Running Preview of #{staticmatic.root_dir} on port #{port}"
           listener :port => port do
             uri "/", :handler => Previewer.new(staticmatic)
