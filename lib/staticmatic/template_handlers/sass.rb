@@ -2,7 +2,9 @@ module StaticMatic
   module TemplateHandlers
     class Sass < ActionView::TemplateHandler
       def render(template)
-        ::Sass::Engine.new(template.source).render
+        # ActionView 2.1 compatibility
+        template = template.source if template.respond_to? :source
+        ::Sass::Engine.new(template).render
       end
     end
   end
