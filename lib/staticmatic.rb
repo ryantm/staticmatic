@@ -11,7 +11,7 @@ require 'haml/template'
 require 'sass'
 require 'mongrel'
 
-["base", "rescue", "previewer", "builder", "template_handlers/haml", "template_handlers/sass", "deprecation", "actionpack_support/mime"].each do |file|
+["base", "rescue", "previewer", "builder", "template_handlers/sass", "deprecation", "actionpack_support/mime", "actionpack_support/remove_partial_benchmark"].each do |file|
   require "#{lib_path}/staticmatic/#{file}"
 end
 
