@@ -37,6 +37,7 @@ module StaticMatic
     end
     
     def should_overwrite?(path, format)
+      return true
 
       build_file = "#{build_path_for(path)}.#{format}"
 
@@ -44,7 +45,7 @@ module StaticMatic
       
       if File.exists? build_file
 
-        template_path = @staticmatic.template.full_template_path(path, @staticmatic.template.pick_template_extension(path))
+        template_path = @staticmatic.template.full_template_path(path, @staticmatic.template.finder.pick_template_extension(path))
         #file_changed? template_path, build_file
         true
       else
