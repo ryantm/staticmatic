@@ -3,14 +3,14 @@ $:.unshift "#{File.dirname(__FILE__)}/../vendor/html-scanner"
 lib_path = File.dirname(__FILE__)
 
 require 'rubygems'
+gem 'activesupport', '=2.0.2'
+gem 'actionpack', '=2.0.2'
 require 'active_support'
-require 'actionpack'
 require 'action_view'
 require 'haml'
 require 'sass'
-require 'mongrel'
 
-["base", "rescue", "previewer", "builder", "template_handlers/sass", "deprecation", "actionpack_support/mime"].each do |file|
+["base", "config", "rescue", "template_handlers/sass", "deprecation", "actionpack_support/mime"].each do |file|
   require "#{lib_path}/staticmatic/#{file}"
 end
 
@@ -30,10 +30,7 @@ ActionView::Base.class_eval do
   include StaticMatic::Deprecation
 end
 
-
-
 # TODO: Replace with a correct template registration
 Haml.init_rails(binding) # ActionView::Base.register_template_handler(:haml, Haml::Template)
 
 ActionView::Base.register_template_handler :sass, StaticMatic::TemplateHandlers::Sass
-

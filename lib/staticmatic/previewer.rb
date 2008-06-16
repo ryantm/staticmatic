@@ -1,3 +1,5 @@
+require 'mongrel'
+
 module StaticMatic
   class Previewer < Mongrel::HttpHandler
     @@file_only_methods = ["GET","HEAD"]
@@ -51,10 +53,11 @@ module StaticMatic
     class << self
       # Starts the StaticMatic preview server
       def start(staticmatic)
-        port = "3000"
-        config = Mongrel::Configurator.new do
-          puts "Running Preview of #{staticmatic.root_dir} on port #{port}"
-          listener :port => port do
+
+        config = Mongrel::Configurator.new :host => StaticMatic::Config[:host] do
+          puts "Running Preview of #{staticmatic.root_dir} on port #{StaticMatic::Config[:post]}"
+          listener :port => StaticMatic::Config[:post] do
+
             uri "/", :handler => Previewer.new(staticmatic)
           end
           trap("INT") { stop }

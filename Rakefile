@@ -3,7 +3,7 @@ require 'rubygems'
 require 'spec'
 require 'spec/rake/spectask'
 
-task :default => :spec 
+task :default => :spec
 
 desc "Run all specs in spec directory (excluding plugin specs)"
 

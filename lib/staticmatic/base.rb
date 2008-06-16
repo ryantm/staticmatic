@@ -13,8 +13,22 @@ module StaticMatic
       @src_dir = "#{@root_dir}/src"
       @build_dir = "#{@root_dir}/site"
       load_helpers
+      initialize_config
       initialize_logger
       initialize_template
+    end
+    
+    def initialize_config
+      StaticMatic::Config.setup
+      config_file = File.join(@root_dir, "config.rb")
+      
+      if File.exists? config_file
+        require config_file 
+      end
+      
+      if defined?(Haml::Template)
+        Haml::Template.options = StaticMatic::Config[:haml_options]
+      end
     end
     
     # Create a logger to keep ActionView happy
