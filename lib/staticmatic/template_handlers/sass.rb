@@ -4,7 +4,7 @@ module StaticMatic
       def render(template)
         # ActionView 2.1 compatibility
         template = template.source if template.respond_to? :source
-        ::Sass::Engine.new(template).render
+        ::Sass::Engine.new(template, StaticMatic::Config[:sass_options]).render
       end
     end
   end
