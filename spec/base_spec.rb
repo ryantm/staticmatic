@@ -9,7 +9,7 @@ describe StaticMatic::Base do
 
   it "should catch any template errors" do
     output = @staticmatic.render("page_with_error")
-    output.should match(/4 spaces were used for indentation/)
+    output.should include("Illegal nesting")
   end
   
   it "should still render correctly after an error occured" do

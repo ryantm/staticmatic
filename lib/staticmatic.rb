@@ -3,8 +3,9 @@ $:.unshift "#{File.dirname(__FILE__)}/../vendor/html-scanner"
 lib_path = File.dirname(__FILE__)
 
 require 'rubygems'
-gem 'activesupport', '=2.0.2'
-gem 'actionpack', '=2.0.2'
+# Uncomment for force old actionpack
+#gem 'activesupport', '=2.0.2'
+#gem 'actionpack', '=2.0.2'
 require 'active_support'
 require 'action_view'
 require 'haml'

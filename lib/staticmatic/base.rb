@@ -41,8 +41,17 @@ module StaticMatic
     def initialize_template
       @template = ActionView::Base.new([], {}, self)
       @template.template_format = :html
-      @template.finder.view_paths = [@src_dir]
+      finder.view_paths = [@src_dir]
       @template.instance_variable_set("@staticmatic", self)
+    end
+    
+    # Work around actionpack API changes
+    def finder
+      if @template.respond_to? :finder
+        @template.finder
+      else
+        @template
+      end
     end
     
     def render(template, options = {})
@@ -52,7 +61,7 @@ module StaticMatic
       begin
         @template.render_file(full_template_path(template), true)
       rescue Exception => e
-        rescue_from_error(e)        
+        rescue_from_error(e)
       end
     end
     
@@ -152,7 +161,7 @@ module StaticMatic
     def can_render?(template)
       @template.template_format = determine_format_for(template)
       template = strip_extension(template)
-      @template.finder.file_exists?(full_template_path(template))
+      finder.file_exists?(full_template_path(template))
     end
     
     # Adds 'index' to a given template path if the path is a directory
