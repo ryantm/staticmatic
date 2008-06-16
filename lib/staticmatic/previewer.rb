@@ -56,7 +56,7 @@ module StaticMatic
 
         config = Mongrel::Configurator.new :host => StaticMatic::Config[:host] do
           puts "Running Preview of #{staticmatic.root_dir} on port #{StaticMatic::Config[:post]}"
-          listener :port => StaticMatic::Config[:post] do
+          listener :port => StaticMatic::Config[:port] do
 
             uri "/", :handler => Previewer.new(staticmatic)
           end
