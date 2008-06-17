@@ -53,6 +53,7 @@ module StaticMatic
     class << self
       # Starts the StaticMatic preview server
       def start(staticmatic)
+        staticmatic = StaticMatic::Base.new(staticmatic) if staticmatic.is_a? String
 
         config = Mongrel::Configurator.new :host => StaticMatic::Config[:host] do
           puts "Running Preview of #{staticmatic.root_dir} on port #{StaticMatic::Config[:post]}"

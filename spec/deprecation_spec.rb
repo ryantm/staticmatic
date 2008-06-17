@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + "/../lib/staticmatic"
+require File.join(File.dirname(__FILE__), "..", "lib", "staticmatic")
 
 # WIP: tested only be seeing that deprecation messages appear!
 describe "Deprecation of old methods" do

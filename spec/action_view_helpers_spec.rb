@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + "/../lib/staticmatic"
+require File.join(File.dirname(__FILE__), "..", "lib", "staticmatic")
 
 describe "ActionView Helper Integration" do
   

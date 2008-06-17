@@ -1,5 +1,5 @@
 module Mime
-  CSS = "text/css"
+  CSS  = "text/css"
   HTML = "text/html"
-  JS = "text/js"
+  JS   = "text/javascript"
 end

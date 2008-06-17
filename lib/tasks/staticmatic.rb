@@ -1,11 +1,9 @@
-require File.dirname(__FILE__) + "/../staticmatic"
+require File.join(File.dirname(__FILE__), "..", "staticmatic")
 
 task :build do
-  require File.dirname(__FILE__) + "/../staticmatic/staticmatic/builder"
-  StaticMatic::Builder.build StaticMatic::Base.new(".")
+  StaticMatic::Builder.build(".")
 end
 
 task :preview do
-  require File.dirname(__FILE__) + "/../staticmatic/staticmatic/previewer"
-  StaticMatic::Previewer.start StaticMatic::Base.new(".")
+  StaticMatic::Previewer.start(".")
 end

@@ -85,6 +85,7 @@ module StaticMatic
     
     class << self
       def build(staticmatic)
+        staticmatic = StaticMatic::Base.new(staticmatic) if staticmatic.is_a? String
         new(staticmatic)
       end
     end
