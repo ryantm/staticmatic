@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + "/../lib/staticmatic"
+require File.join(File.dirname(__FILE__), "..", "lib", "staticmatic")
 
 describe StaticMatic::Config do
   it "should be able to get a configuration key" do

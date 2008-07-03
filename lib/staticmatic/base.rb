@@ -1,5 +1,7 @@
 module StaticMatic
   class Base
+    include StaticMatic::Rescue
+    include StaticMatic::Deprecation
     
     attr_accessor :logger
     attr_accessor :root_dir

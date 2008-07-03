@@ -1,11 +1,11 @@
-module StaticMatic
-  module TemplateHandlers
-    class Sass < ActionView::TemplateHandler
-      def render(template)
-        # ActionView 2.1 compatibility
-        template = template.source if template.respond_to? :source
-        ::Sass::Engine.new(template, StaticMatic::Config[:sass_options]).render
-      end
+module StaticMatic::TemplateHandlers
+  class Sass
+    def initialize(view)
+      @view = view
+    end
+  
+    def render(template, local_assigns)
+      ::Sass::Engine.new(template, StaticMatic::Config[:sass_options]).render
     end
   end
 end

@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + "/../lib/staticmatic"
+require File.join(File.dirname(__FILE__), "..", "lib", "staticmatic")
 
 describe "Backward compatibility for existing sites" do
   before(:all) do

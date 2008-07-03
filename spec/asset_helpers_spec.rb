@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + "/../lib/staticmatic"
+require File.join(File.dirname(__FILE__), "..", "lib", "staticmatic")
 
 describe "Asset Helpers" do
   ActionView::Base.included_modules.each do |mod|
