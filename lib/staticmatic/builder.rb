@@ -9,26 +9,21 @@ module StaticMatic
     end
     
     def build_pages
-      ["pages", "stylesheets"].each do |template_path|
+      %w(pages stylesheets).each do |template_path|
         Dir["#{@staticmatic.src_dir}/#{template_path}/**/*"].each do |path|
           if File.directory? path
-            if !File.exists? build_path_for(path)
+            unless File.exists? build_path_for(path)
               puts "Creating: #{build_path_for(path)}"
               FileUtils.mkdir(build_path_for(path))
             end
           else
-
             format = @staticmatic.determine_format_for(path).to_s
             path = base_template_name_for(path)
             @staticmatic.template.template_format = format
             if should_overwrite?(path, format)
-              if format == "html"
-                output = @staticmatic.render_with_layout(path)
-              else
-                output = @staticmatic.render(path)
-              end
+              output = (format == "html") ? @staticmatic.render_with_layout(path) : @staticmatic.render(path)
                           
-              output_prefix = "#{template_path}/" if template_path != "pages"
+              output_prefix = "#{template_path}/" unless template_path == "pages"
               save_built_file(path, output, format)
             end
           end
@@ -37,17 +32,12 @@ module StaticMatic
     end
     
     def should_overwrite?(path, format)
-      return true
-
       build_file = "#{build_path_for(path)}.#{format}"
-
-      path = @staticmatic.full_template_path(path)
+      path       = @staticmatic.full_template_path(path)
       
       if File.exists? build_file
-
         template_path = @staticmatic.template.full_template_path(path, @staticmatic.template.finder.pick_template_extension(path))
-        #file_changed? template_path, build_file
-        true
+        file_changed? template_path, build_file
       else
         true
       end
@@ -56,11 +46,7 @@ module StaticMatic
     def file_changed?(src_file, build_file)
       build_modification_time = File.stat(build_file).mtime.strftime("%Y%m%d%H%M%s")
       template_modification_time = File.stat(src_file).mtime.strftime("%Y%m%d%H%M%s")
-      if template_modification_time > build_modification_time
-        true
-      else
-        false
-      end
+      template_modification_time > build_modification_time
     end
     
     # Strip off src file path and extension

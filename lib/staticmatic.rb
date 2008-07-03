@@ -4,9 +4,6 @@ $LOAD_PATH.unshift File.dirname(__FILE__) unless
   $LOAD_PATH.include?(File.expand_path(File.dirname(__FILE__)))
 
 require 'rubygems'
-# Uncomment for force old actionpack
-#gem 'activesupport', '=2.0.2'
-#gem 'actionpack', '=2.0.2'
 require 'active_support'
 require 'action_view'
 require 'haml'
@@ -27,8 +24,4 @@ end
 
 # TODO: Replace with a correct template registration
 Haml.init_rails(binding) # ActionView::Base.register_template_handler(:haml, Haml::Template)
-if defined? ActionView::Template and ActionView::Template.respond_to? :register_template_handler
-  ActionView::Template
-else
-  ActionView::Base
-end.register_template_handler :sass, StaticMatic::TemplateHandlers::Sass
+ActionView::Template.register_template_handler :sass, StaticMatic::TemplateHandlers::Sass
