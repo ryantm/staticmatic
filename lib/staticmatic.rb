@@ -4,9 +4,6 @@ $LOAD_PATH.unshift File.dirname(__FILE__) unless
   $LOAD_PATH.include?(File.expand_path(File.dirname(__FILE__)))
 
 require 'rubygems'
-# Uncomment for force old actionpack
-#gem 'activesupport', '=2.0.2'
-#gem 'actionpack', '=2.0.2'
 require 'active_support'
 require 'action_view'
 require 'haml'
