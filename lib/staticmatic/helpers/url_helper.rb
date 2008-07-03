@@ -9,10 +9,6 @@ module StaticMatic
         super(name, options, html_options)
       end
     
-      def link(name, url = "", html_options = nil)
-        link_to name, url, html_options
-      end
-    
       def urlify(string)
         string.tr(" ", "_").
                sub("&", "and").

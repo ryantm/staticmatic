@@ -4,8 +4,13 @@ module StaticMatic::TemplateHandlers
       @view = view
     end
   
-    def render(template, local_assigns)
+    def render(template, local_assigns = {})
+      template = template.source if template.respond_to? :source
       ::Sass::Engine.new(template, StaticMatic::Config[:sass_options]).render
+    end
+    
+    def compilable?
+      false
     end
   end
 end

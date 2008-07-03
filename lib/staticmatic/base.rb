@@ -33,7 +33,6 @@ module StaticMatic
       end
     end
     
-    # Create a logger to keep ActionView happy
     def initialize_logger
       @logger = Logger.new($stderr)
       @logger.level = Logger::INFO
@@ -140,6 +139,7 @@ module StaticMatic
       extension
     end 
     
+    # Default layout is 'site' but we'll also accept 'application'
     def determine_default_layout
       layout = "site"
       
