@@ -13,7 +13,7 @@ module StaticMatic
     def initialize(root_dir)
       @root_dir = root_dir
       @src_dir = "#{@root_dir}/src"
-      @build_dir = "#{@root_dir}/site"
+      @build_dir = "#{@root_dir}/build"
       load_helpers
       initialize_config
       initialize_logger
