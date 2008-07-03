@@ -9,9 +9,9 @@ SPEC = Gem::Specification.new do |s|
   s.summary = "Static sites, the Rails Way"
   s.files = Dir.glob("**/**/**")
   s.test_files =  Dir.glob("spec/*_spec.rb")
-  s.add_dependency("haml", ">2.1.0")
+  s.add_dependency("haml", ">=2.0.1")
   s.add_dependency("mongrel")
-  s.add_dependency("actionpack", ">2.1.0")
-  s.add_dependency("active_support", ">2.1.0")
+  s.add_dependency("actionpack", ">=2.1.0")
+  s.add_dependency("activesupport", ">=2.1.0")
   s.executables=['staticmatic']
 end
