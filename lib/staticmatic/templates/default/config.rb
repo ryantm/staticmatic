@@ -1,4 +1,3 @@
-# StaticMatic::Config.setup (
-#   :host => "127.0.0.1",
-#   :port => "3000"
-# )
+StaticMatic::Config.setup(
+  :use_build_tracking => true
+)

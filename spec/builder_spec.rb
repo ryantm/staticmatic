@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), "..", "lib", "staticmatic")
 
 describe StaticMatic::Builder do 
   before(:all) do
-    @root_dir = File.dirname(__FILE__) + "/fixtures/test"
+    @root_dir = File.dirname(__FILE__) + "/fixtures/builder-test"
     @staticmatic = StaticMatic::Base.new(@root_dir)
     @staticmatic.logger = mock("logger")
     @staticmatic.logger.should_receive(:info).at_least(:once)

@@ -23,7 +23,7 @@ module StaticMatic
     def initialize_config
       StaticMatic::Config.setup
       config_file = File.join(@root_dir, "config.rb")
-      
+
       if File.exists? config_file
         require config_file 
       end

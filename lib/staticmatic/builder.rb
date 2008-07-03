@@ -4,9 +4,12 @@ module StaticMatic
     
     def initialize(staticmatic)
       @staticmatic = staticmatic
-      determine_last_build
+
+      determine_last_build if StaticMatic::Config[:use_build_tracking]
+
       build_pages
-      log_version
+
+      log_version if StaticMatic::Config[:use_build_tracking]
     end
     
     def determine_last_build
@@ -56,7 +59,7 @@ module StaticMatic
             @staticmatic.template.template_format = format
             build_file_path = "#{build_path_for(path)}.#{format}"
 
-            if should_overwrite?(path, build_file_path)
+            if !StaticMatic::Config[:use_build_tracking] || (StaticMatic::Config[:use_build_tracking] && should_overwrite?(path, build_file_path))
               if format == "html"
                 output = @staticmatic.render_with_layout(base_template_name)
               else
@@ -82,7 +85,7 @@ module StaticMatic
     
     def file_changed?(src_file)
       template_modification_time = File.stat(src_file).mtime.strftime("%Y%m%d%H%M%S")
-      puts "#{template_modification_time.to_i} > #{@last_build.to_i}"
+
       if template_modification_time.to_i > @last_build.to_i
         true
       else
