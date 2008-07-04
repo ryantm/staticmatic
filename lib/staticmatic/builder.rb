@@ -57,7 +57,7 @@ module StaticMatic
             base_template_name = base_template_name_for(path)
 
             @staticmatic.template.template_format = format
-            build_file_path = "#{build_path_for(path)}.#{format}"
+            build_file_path = "#{build_path_for(path)}"
 
             if !StaticMatic::Config[:use_build_tracking] || (StaticMatic::Config[:use_build_tracking] && should_overwrite?(path, build_file_path))
               if format == "html"
