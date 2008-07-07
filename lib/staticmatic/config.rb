@@ -6,7 +6,8 @@ module StaticMatic
           :host                   => "0.0.0.0",
           :port                   => "3000",
           :sass_options           => {},
-          :haml_options           => {}
+          :haml_options           => {},
+          :use_build_tracking     => true
         }
       end
 

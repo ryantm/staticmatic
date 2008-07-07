@@ -15,6 +15,7 @@ module StaticMatic
   
   module TemplateHandlers
     autoload :Sass, 'staticmatic/template_handlers/sass'
+    autoload :Markdown, 'staticmatic/template_handlers/markdown'
   end
 end
 

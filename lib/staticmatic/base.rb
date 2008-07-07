@@ -24,7 +24,7 @@ module StaticMatic
       StaticMatic::Config.setup
       config_file = File.join(@root_dir, "config.rb")
       require config_file if File.exists? config_file
-
+      
       Haml::Template.options = StaticMatic::Config[:haml_options] if defined?(Haml::Template)
     end
     

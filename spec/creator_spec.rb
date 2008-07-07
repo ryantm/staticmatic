@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), "..", "lib", "staticmatic")
 
 describe StaticMatic::Creator do
   before(:all) do
-    @new_dir = File.dirname(__FILE__) + "/fixtures/test"
+    @new_dir = File.dirname(__FILE__) + "/fixtures/creator-test"
     StaticMatic::Creator.setup(@new_dir)
   end
   
