@@ -163,6 +163,7 @@ module StaticMatic
     def can_render?(template)
       @template.template_format = determine_format_for(template)
       template = strip_extension(template)
+      finder.class.reload!
       finder.file_exists?(full_template_path(template))
     end
     
