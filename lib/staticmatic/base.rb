@@ -23,10 +23,7 @@ module StaticMatic
     def initialize_config
       StaticMatic::Config.setup
       config_file = File.join(@root_dir, "config.rb")
-
-      if File.exists? config_file
-        require config_file 
-      end
+      require config_file if File.exists? config_file
       
       if defined?(Haml::Template)
         Haml::Template.options = StaticMatic::Config[:haml_options]
@@ -48,11 +45,9 @@ module StaticMatic
     
     # Work around actionpack API changes
     def finder
-      if @template.respond_to? :finder
-        @template.finder
-      else
+      @template.respond_to?(:finder) ?
+        @template.finder :
         @template
-      end
     end
     
     def render(template, options = {})
@@ -79,9 +74,7 @@ module StaticMatic
       # Clean @layout variable for next request
       @template.instance_variable_set("@layout", nil)
       
-      if !layout
-        layout = determine_default_layout
-      end
+      layout ||= determine_default_layout
       
       render("layouts/#{layout}")
     end
@@ -102,10 +95,8 @@ module StaticMatic
     def template_directory_for(template)
       template_directory = "pages"
       
-      ["stylesheets", "layouts"].each do |directory|
-        if template.match(/^(\/)?#{directory}/)
-          template_directory = ""
-        end
+      %w(stylesheets layouts).each do |directory|
+        template_directory = "" if template.match(/^(\/)?#{directory}/)
       end
       
       template_directory
@@ -116,13 +107,11 @@ module StaticMatic
     # For example: application.css.sass -> :css
     #
     def determine_format_for(template)
-       
       ext_matches = template.match /\.([a-z0-9]+)/
       
       # For templates that have only handler extensions, default for backwards compatibility
       if ext_matches
-        if !template.match(/\.([a-z0-9]+)\./)
-
+        unless template.match(/\.([a-z0-9]+)\./)
           case ext_matches[1]
           when "sass"
             extension = :css
@@ -144,11 +133,9 @@ module StaticMatic
       layout = "site"
       
       Dir["#{@src_dir}/layouts/**"].each do |layout_file|
-
-        if layout_file.match /application/
-          layout = "application"
-        end
+        layout = "application" if layout_file.match /application/
       end
+      
       layout 
     end
     
@@ -171,11 +158,9 @@ module StaticMatic
     # Will render as path/index.html
     #
     def add_index_if_needed(template)
-      if File.directory? File.join(File.expand_path(@src_dir), template)
-        File.join(template, "index")
-      else
+      File.directory?(File.join(File.expand_path(@src_dir), template)) ?
+        File.join(template, "index") :
         template
-      end
     end
     
     # Full path to a template, relative to src/

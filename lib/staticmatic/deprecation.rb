@@ -2,15 +2,12 @@ module StaticMatic
   module Deprecation
     def deprecate(options = {})
       message = "#{caller_method_name} has been deprecated and will be removed."
-      
-      if options[:alt]
-        message << %Q{ Please use "#{options[:alt]}" instead }
-      end
+      message << %Q{ Please use "#{options[:alt]}" instead } if options[:alt]
       
       logger.warn(message)
     end
     
-    private
+  private
     
     # Thanks to http://snippets.dzone.com/posts/show/2787 for this nugget
     def caller_method_name
