@@ -4,22 +4,18 @@ module StaticMatic
     
     def initialize(staticmatic)
       @staticmatic = staticmatic
-
-      determine_last_build if StaticMatic::Config[:use_build_tracking]
-
+      determine_last_build 
       build_pages
-
-      log_version if StaticMatic::Config[:use_build_tracking]
+      log_version 
     end
     
     def determine_last_build
       versions_file = @staticmatic.root_dir + "/builds"
-      
-      @last_build = ""
-      @last_build = File.read(versions_file).split(/\n/)[0] if File.exists?(versions_file)
+      @last_build   = File.read(versions_file).split(/\n/)[0] if File.exists?(versions_file)
     end
     
     def log_version
+      return unless StaticMatic::Config[:use_build_tracking]
       timestamp = Time.now.strftime("%Y%m%d%H%M%S")
       versions_file = @staticmatic.root_dir + "/builds"
       
@@ -43,7 +39,6 @@ module StaticMatic
           if File.directory? path
             unless File.exists? build_path_for(path)
               @staticmatic.logger.info("Creating: #{build_path_for(path)}")
-              
               FileUtils.mkdir(build_path_for(path))
             end
           else
@@ -53,12 +48,10 @@ module StaticMatic
             @staticmatic.template.template_format = format
             build_file_path = "#{build_path_for(path)}"
 
-            if !StaticMatic::Config[:use_build_tracking] || (StaticMatic::Config[:use_build_tracking] && should_overwrite?(path, build_file_path))
-              if format == "html"
-                output = @staticmatic.render_with_layout(base_template_name)
-              else
-                output = @staticmatic.render(base_template_name)
-              end
+            if !StaticMatic::Config[:use_build_tracking] || should_overwrite?(path, build_file_path)
+              output = (format == "html") ? 
+                @staticmatic.render_with_layout(base_template_name) : 
+                @staticmatic.render(base_template_name)
                           
               output_prefix = "#{template_path}/" if template_path != "pages"
               save_built_file(build_file_path, output)
@@ -69,11 +62,8 @@ module StaticMatic
     end
     
     def should_overwrite?(template_file, build_file)
-      if File.exists? build_file
-        file_changed? template_file
-      else
-        true
-      end
+      return true unless File.exists?(build_file)
+      file_changed?(template_file)
     end
     
     def file_changed?(src_file)

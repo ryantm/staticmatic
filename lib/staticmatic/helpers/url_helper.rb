@@ -2,10 +2,7 @@ module StaticMatic
   module Helpers
     module UrlHelper
       def link_to(name, options = {}, html_options = nil)
-        if options == {}
-          options = urlify(name)
-        end
-      
+        options = urlify(name) if options == {}
         super(name, options, html_options)
       end
     

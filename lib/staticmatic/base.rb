@@ -141,6 +141,7 @@ module StaticMatic
     def can_render?(template)
       @template.template_format = determine_format_for(template)
       template = strip_extension(template)
+      @template.finder.class.reload!
       @template.finder.file_exists?(full_template_path(template))
     end
     
@@ -148,11 +149,9 @@ module StaticMatic
     # Will render as path/index.html
     #
     def add_index_if_needed(template)
-      if File.directory? File.join(File.expand_path(@src_dir), template)
-        File.join(template, "index")
-      else
+      File.directory?(File.join(File.expand_path(@src_dir), template)) ?
+        File.join(template, "index") :
         template
-      end
     end
     
     # Full path to a template, relative to src/

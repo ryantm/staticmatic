@@ -5,10 +5,9 @@ module StaticMatic
         deprecate :alt => "stylesheet_link_tag"
 
         if params.blank?
-          stylesheets = []
-          Dir[File.join(@staticmatic.src_dir, 'stylesheets', '*.sass')].each do |stylesheet|
-            stylesheet = File.basename(stylesheet).chomp(File.extname(stylesheet))
-            stylesheets << stylesheet
+          glob = File.join(@staticmatic.src_dir, 'stylesheets', '*.sass')
+          stylesheets = Dir[glob].inject([]) do |sum, stylesheet|
+            sum << File.basename(stylesheet).chomp(File.extname(stylesheet))
           end
         
           stylesheets.concat assets_from_build_directory("stylesheets", "css", stylesheets)
@@ -30,7 +29,6 @@ module StaticMatic
       end
     
       def javascripts(*files)
-      
         javascript_include_tag(files)
       end
     
@@ -39,15 +37,11 @@ module StaticMatic
       #
       # Optionally pass in an array to exclude files served dynamically
       def assets_from_build_directory(dir, ext, exclude = [])
-        files = []
-        Dir[File.join(@staticmatic.build_dir, dir, "*.#{ext}")].each do |file|
+        glob = File.join(@staticmatic.build_dir, dir, "*.#{ext}")
+        Dir[glob].inject([]) do |sum, file|
           file = File.basename(file).chomp(File.extname(file))
-          if !exclude || !exclude.include?(file)
-            files << file
-          end
+          sum << file unless exclude && exclude.include?(file)
         end
-      
-        files
       end
     end
   end

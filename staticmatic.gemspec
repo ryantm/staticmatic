@@ -2,8 +2,8 @@ require 'rubygems'
 
 SPEC = Gem::Specification.new do |s|
   s.name = "staticmatic"
-  s.version = "2.0.2"
-  s.date = "2007-07-04"
+  s.version = "2.0.3"
+  s.date = "2007-07-14"
   s.author = "Stephen Bartholomew"
   s.email = "steve@curve21.com"
   s.homepage = "http//www.staticmatic.net"

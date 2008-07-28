@@ -8,7 +8,7 @@ module StaticMatic
         
         FileUtils.cp_r(template_directory, directory)
         
-        if !File.exists?(directory + "/build")
+        unless File.exists?(directory + "/build")
           FileUtils.mkdir(directory + "/build")
           FileUtils.mkdir(directory + "/build/stylesheets")
         end
