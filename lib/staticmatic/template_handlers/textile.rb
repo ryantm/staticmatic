@@ -1,8 +1,8 @@
 module StaticMatic::TemplateHandlers
-  class Sass < ActionView::TemplateHandler
+  class Textile < ActionView::TemplateHandler
     def render(template, local_assigns = {})
       template = template.source if template.respond_to? :source
-      ::Sass::Engine.new(template, StaticMatic::Config[:sass_options]).render
+      ::RedCloth::new( template ).to_html
     end
   end
 end

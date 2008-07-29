@@ -1,16 +1,8 @@
 module StaticMatic::TemplateHandlers
-  class Markdown
-    def initialize(view)
-      @view = view
-    end
-  
+  class Markdown < ActionView::TemplateHandler
     def render(template, local_assigns = {})
       template = template.source if template.respond_to? :source
-      BlueCloth::new( template ).to_html
-    end
-    
-    def compilable?
-      false
+      ::BlueCloth::new(template).to_html
     end
   end
 end

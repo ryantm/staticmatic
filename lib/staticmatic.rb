@@ -30,5 +30,15 @@ else
   action_view_template = ActionView::Base
 end
 
-action_view_template.register_template_handler :sass, StaticMatic::TemplateHandlers::Sass
-action_view_template.register_template_handler :markdown, StaticMatic::TemplateHandlers::Markdown
+action_view_template.register_template_handler(:sass, StaticMatic::TemplateHandlers::Sass)
+
+{ "Markdown" => "bluecloth",
+  "Textile"  => "redcloth",
+  "Liquid"   => "liquid" }.each do |language, gem_name|
+  begin
+    require gem_name
+    action_view_template.register_template_handler(language.downcase.to_sym, 
+                                                   "StaticMatic::TemplateHandlers::#{language}".constantize)
+  rescue
+  end
+end

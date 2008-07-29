@@ -26,6 +26,27 @@ describe StaticMatic::Base do
     output = @staticmatic.render("haml_test")
     output.should match(/<strong>Hello from haml<\/strong>/)
   end
+
+  if ActionView::Template.template_handler_extensions.include? :markdown
+    it "should render markdown template" do
+      output = @staticmatic.render("markdown_test")
+      output.should match(/<strong>Hello from markdown<\/strong>/)
+    end
+  end
+  
+  if ActionView::Template.template_handler_extensions.include? :textile
+    it "should render textile template" do
+      output = @staticmatic.render("textile_test")
+      output.should match(/<strong>Hello from textile<\/strong>/)
+    end
+  end
+  
+  if ActionView::Template.template_handler_extensions.include? :liquid
+    it "should render liquid template" do
+      output = @staticmatic.render("liquid_test")
+      output.should match(/<strong>Hello from liquid<\/strong>/)
+    end
+  end
   
   it "should register a css renderer" do
     output = @staticmatic.render("stylesheets/site.css")

@@ -14,8 +14,10 @@ module StaticMatic
   end
   
   module TemplateHandlers
-    autoload :Sass, 'staticmatic/template_handlers/sass'
+    autoload :Sass,     'staticmatic/template_handlers/sass'
+    autoload :Liquid,   'staticmatic/template_handlers/liquid'
     autoload :Markdown, 'staticmatic/template_handlers/markdown'
+    autoload :Textile, 'staticmatic/template_handlers/textile'
   end
 end
 
