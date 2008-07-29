@@ -5,8 +5,7 @@ module StaticMatic::TemplateHandlers
     end
   
     def render(template, local_assigns = {})
-      template = template.source if template.respond_to? :source
-      BlueCloth::new( template ).to_html
+      BlueCloth::new(template.source).to_html
     end
     
     def compilable?

@@ -24,11 +24,5 @@ end
 
 # TODO: Replace with a correct template registration
 Haml.init_rails(binding) # ActionView::Base.register_template_handler(:haml, Haml::Template)
-if defined? ActionView::Template and ActionView::Template.respond_to? :register_template_handler
-  action_view_template = ActionView::Template
-else
-  action_view_template = ActionView::Base
-end
-
-action_view_template.register_template_handler :sass, StaticMatic::TemplateHandlers::Sass
-action_view_template.register_template_handler :markdown, StaticMatic::TemplateHandlers::Markdown
+ActionView::Template.register_template_handler :sass, StaticMatic::TemplateHandlers::Sass
+ActionView::Template.register_template_handler :markdown, StaticMatic::TemplateHandlers::Markdown
