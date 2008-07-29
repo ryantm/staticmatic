@@ -8,7 +8,7 @@ describe "Asset Helpers" do
   include StaticMatic::Helpers::AssetTagHelper
   before(:all) do
     @sample_site_path = File.dirname(__FILE__) + "/fixtures/sample"
-    @staticmatic = StaticMatic::Base.new(@sample_site_path)
+    @staticmatic      = StaticMatic::Base.new(@sample_site_path)
   end
   
   it "should render partial" do
@@ -17,8 +17,6 @@ describe "Asset Helpers" do
   
   it "should generate stylesheet link" do
     @relative_path_to_root = @staticmatic.calculate_relative_path_to_root('pages/services/web_development/costs')
-    output = stylesheet_link_tag("site")
-    expected = "../../stylesheets/site.css"
-    output.should match(/#{expected}/)
+    stylesheet_link_tag("site").should include("../../stylesheets/site.css")
   end
 end

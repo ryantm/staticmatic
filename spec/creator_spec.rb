@@ -15,7 +15,7 @@ describe StaticMatic::Creator do
   end
   
   it "should copy default files into directory" do
-    ["build", "src", "Rakefile", "config.rb"].each do |filename|
+    %w(build src Rakefile config.rb).each do |filename|
       File.exists?("#{@new_dir}/#{filename}").should be_true
     end
   end
