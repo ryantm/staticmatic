@@ -20,7 +20,6 @@ end
 
 ActionView::Base.class_eval do
   include StaticMatic::Helpers::AssetTagHelper
-  include StaticMatic::Helpers::DeprecatedHelpers
   include StaticMatic::Helpers::PageHelper
   include StaticMatic::Helpers::UrlHelper
   include Mime

@@ -65,7 +65,7 @@ module StaticMatic
       # Clean @layout variable for next request
       @template.instance_variable_set("@layout", nil)
       
-      layout ||= determine_default_layout
+      layout ||= "site"
       
       render("layouts/#{layout}")
     end
@@ -117,17 +117,6 @@ module StaticMatic
       end
       
       extension
-    end 
-    
-    # Default layout is 'site' but we'll also accept 'application'
-    def determine_default_layout
-      layout = "site"
-      
-      Dir["#{@src_dir}/layouts/**"].each do |layout_file|
-        layout = "application" if layout_file.match /application/
-      end
-      
-      layout 
     end
     
     # Remove the extension from a given template path

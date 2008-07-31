@@ -15,9 +15,4 @@ describe "Deprecation of old methods" do
     @staticmatic.logger.should_receive(:warn).with(/has been deprecated/)
     deprecate_test
   end
-  
-  it "should deprecate old helpers" do
-    @staticmatic.template.logger.should_receive(:warn).with(/has been deprecated/)
-    @staticmatic.template.link "Test"
-  end
 end
