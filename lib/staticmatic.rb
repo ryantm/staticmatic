@@ -22,6 +22,6 @@ ActionView::Base.class_eval do
   include StaticMatic::Helpers::AssetTagHelper
   include StaticMatic::Helpers::PageHelper
   include StaticMatic::Helpers::UrlHelper
-  include Mime
   include StaticMatic::Deprecation
+  include Mime
 end

@@ -16,3 +16,4 @@ end
 
 require 'staticmatic/actionpack_support/mime'
 require 'staticmatic/actionpack_support/remove_partial_benchmark'
+require 'staticmatic/actionpack_support/remove_controller_caching'
