@@ -1,17 +1,17 @@
 require File.join(File.dirname(__FILE__), "..", "lib", "staticmatic")
 
 describe StaticMatic::Base do
-  before(:all) do
+  before :all do
     @sample_site_path = File.dirname(__FILE__) + "/fixtures/sample"
     @staticmatic      = StaticMatic::Base.new(@sample_site_path)
   end
 
-  it "should catch any template errors" do
+  it "should catch any haml template errors" do
     output = @staticmatic.render("page_with_error")
     output.should include("Illegal nesting")
   end
   
-  it "should still render correctly after an error occured" do
+  it "should still render correctly after a haml error occured" do
     output = @staticmatic.render("page_with_error")
     @staticmatic.render("hello_world").should include("Hello world!")
   end

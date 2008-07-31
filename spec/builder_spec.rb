@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), "..", "lib", "staticmatic")
 
 describe StaticMatic::Builder do 
-  before(:all) do
+  before :each do
     @root_dir    = File.dirname(__FILE__) + "/fixtures/builder-test"
     @staticmatic = StaticMatic::Base.new(@root_dir)
     
@@ -12,7 +12,7 @@ describe StaticMatic::Builder do
     StaticMatic::Builder.build(@staticmatic)
   end
   
-  after(:all) do
+  after :each do
     FileUtils.rm_rf(@root_dir)
   end
   
