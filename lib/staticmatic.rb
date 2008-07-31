@@ -8,7 +8,15 @@ require 'active_support'
 require 'action_view'
 require 'staticmatic/autoload'
 require 'staticmatic/base'
-require 'staticmatic/template_handlers'
+
+# Load template handlers
+Dir['lib/staticmatic/template_handlers/*.rb'].each do |handler|
+  begin
+    require "staticmatic/template_handlers/#{File.basename(handler)}"
+  rescue
+    # Could not load gem or handler
+  end
+end
 
 ActionView::Base.class_eval do
   include StaticMatic::Helpers::AssetTagHelper

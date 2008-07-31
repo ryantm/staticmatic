@@ -1,8 +1,13 @@
-module StaticMatic::TemplateHandlers
-  class Textile < ActionView::TemplateHandler
-    def render(template, local_assigns = {})
-      template = template.source if template.respond_to? :source
-      ::RedCloth::new( template ).to_html
+require 'redcloth'
+
+module StaticMatic
+  module TemplateHandlers
+    class Textile < ActionView::TemplateHandler
+      def render(template, local_assigns = {})
+        ::RedCloth::new(template.source).to_html
+      end
     end
   end
 end
+
+ActionView::Template.register_template_handler(:textile, StaticMatic::TemplateHandlers::Textile)

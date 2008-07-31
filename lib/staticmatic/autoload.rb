@@ -12,9 +12,6 @@ module StaticMatic
     autoload :PageHelper,        'staticmatic/helpers/page_helper'
     autoload :UrlHelper,         'staticmatic/helpers/url_helper'
   end
-  
-  module TemplateHandlers
-  end
 end
 
 require 'staticmatic/actionpack_support/mime'
