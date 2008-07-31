@@ -6,12 +6,9 @@ $LOAD_PATH.unshift File.dirname(__FILE__) unless
 require 'rubygems'
 require 'active_support'
 require 'action_view'
-require 'haml'
-require 'haml/template'
-require 'sass'
-
 require 'staticmatic/autoload'
 require 'staticmatic/base'
+require 'staticmatic/template_handlers'
 
 ActionView::Base.class_eval do
   include StaticMatic::Helpers::AssetTagHelper
@@ -20,25 +17,4 @@ ActionView::Base.class_eval do
   include StaticMatic::Helpers::UrlHelper
   include Mime
   include StaticMatic::Deprecation
-end
-
-# TODO: Replace with a correct template registration
-Haml.init_rails(binding) # ActionView::Base.register_template_handler(:haml, Haml::Template)
-if defined? ActionView::Template and ActionView::Template.respond_to? :register_template_handler
-  action_view_template = ActionView::Template
-else
-  action_view_template = ActionView::Base
-end
-
-action_view_template.register_template_handler(:sass, StaticMatic::TemplateHandlers::Sass)
-
-{ "Markdown" => "bluecloth",
-  "Textile"  => "redcloth",
-  "Liquid"   => "liquid" }.each do |language, gem_name|
-  begin
-    require gem_name
-    action_view_template.register_template_handler(language.downcase.to_sym, 
-                                                   "StaticMatic::TemplateHandlers::#{language}".constantize)
-  rescue
-  end
 end
