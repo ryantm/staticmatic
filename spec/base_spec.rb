@@ -3,8 +3,7 @@ require File.join(File.dirname(__FILE__), "..", "lib", "staticmatic")
 describe StaticMatic::Base do
   before(:all) do
     @sample_site_path = File.dirname(__FILE__) + "/fixtures/sample"
-    
-    @staticmatic = StaticMatic::Base.new(@sample_site_path)
+    @staticmatic      = StaticMatic::Base.new(@sample_site_path)
   end
 
   it "should catch any template errors" do
@@ -14,7 +13,7 @@ describe StaticMatic::Base do
   
   it "should still render correctly after an error occured" do
     output = @staticmatic.render("page_with_error")
-    @staticmatic.render("hello_world").should match(/Hello world!/)
+    @staticmatic.render("hello_world").should include("Hello world!")
   end
   
   it "should load custom helpers" do

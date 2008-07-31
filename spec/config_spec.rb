@@ -1,8 +1,12 @@
 require File.join(File.dirname(__FILE__), "..", "lib", "staticmatic")
 
 describe StaticMatic::Config do
+  before :all do
+    StaticMatic::Config.setup
+  end
+  
   it "should be able to get a configuration key" do
-    StaticMatic::Config[:host].should == "0.0.0.0"
+    StaticMatic::Config[:host].should == StaticMatic::Config.defaults[:host]
   end
 
   it "should be able to set a configuration key" do
@@ -18,7 +22,7 @@ describe StaticMatic::Config do
   end
 
   it "should be able to #fetch a key that does exist" do
-    StaticMatic::Config.fetch(:host, "192.168.2.1").should == "0.0.0.0"
+    StaticMatic::Config.fetch(:host, "192.168.2.1").should == StaticMatic::Config.defaults[:host]
   end
 
   it "should be able to #fetch a key that does exist" do

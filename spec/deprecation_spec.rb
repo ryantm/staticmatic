@@ -2,8 +2,8 @@ require File.join(File.dirname(__FILE__), "..", "lib", "staticmatic")
 
 describe "Deprecation of old methods" do
   before(:all) do
-    @sample_site_path = File.dirname(__FILE__) + "/fixtures/sample"
-    @staticmatic = StaticMatic::Base.new(@sample_site_path)
+    @sample_site_path   = File.dirname(__FILE__) + "/fixtures/sample"
+    @staticmatic        = StaticMatic::Base.new(@sample_site_path)
     @staticmatic.logger = mock("logger") # Mock the logger
   end
   
