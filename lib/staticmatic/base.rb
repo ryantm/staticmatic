@@ -25,9 +25,7 @@ module StaticMatic
       config_file = File.join(@root_dir, "config.rb")
       require config_file if File.exists? config_file
       
-      if defined?(Haml::Template)
-        Haml::Template.options = StaticMatic::Config[:haml_options]
-      end
+      Haml::Template.options = StaticMatic::Config[:haml_options] if defined?(Haml::Template)
     end
     
     def initialize_logger
@@ -39,15 +37,8 @@ module StaticMatic
     def initialize_template
       @template = ActionView::Base.new([], {}, self)
       @template.template_format = :html
-      finder.view_paths = [@src_dir]
+      @template.finder.view_paths = [@src_dir]
       @template.instance_variable_set("@staticmatic", self)
-    end
-    
-    # Work around actionpack API changes
-    def finder
-      @template.respond_to?(:finder) ?
-        @template.finder :
-        @template
     end
     
     def render(template, options = {})
@@ -120,7 +111,7 @@ module StaticMatic
           end
         end
         
-        extension = ext_matches[1].to_sym if !extension
+        extension = ext_matches[1].to_sym unless extension
       else
         extension = :html
       end
@@ -150,8 +141,8 @@ module StaticMatic
     def can_render?(template)
       @template.template_format = determine_format_for(template)
       template = strip_extension(template)
-      finder.class.reload!
-      finder.file_exists?(full_template_path(template))
+      @template.finder.class.reload!
+      @template.finder.file_exists?(full_template_path(template))
     end
     
     # Adds 'index' to a given template path if the path is a directory

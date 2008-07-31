@@ -28,7 +28,7 @@ module StaticMatic
           
           if @staticmatic.can_render? path_info
             output = (file_ext == "css") ?
-              @staticmatic.render(path_info)
+              @staticmatic.render(path_info) :
               @staticmatic.render_with_layout(file_name)
           else
             if @files.can_serve(path_info)
