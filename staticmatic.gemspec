@@ -38,7 +38,13 @@ Gem::Specification.new do |s|
                    "lib/staticmatic/templates/default/src/stylesheets/site.css.sass",
                    "lib/staticmatic/templates/rescues/default_error.html.erb",
                    "lib/staticmatic/templates/rescues/template_error.html.erb",
-                   "lib/tasks/staticmatic.rb"]
+                   "lib/tasks/staticmatic.rb",
+                   "vendor/html-scanner/html/document.rb",
+                   "vendor/html-scanner/html/node.rb",
+                   "vendor/html-scanner/html/sanitizer.rb",
+                   "vendor/html-scanner/html/selector.rb",
+                   "vendor/html-scanner/html/tokenizer.rb",
+                   "vendor/html-scanner/html/version.rb"]
   s.executables = %w(staticmatic)
   s.add_dependency("haml", ">=2.0.1")
   s.add_dependency("mongrel")
