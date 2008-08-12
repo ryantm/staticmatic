@@ -8,6 +8,7 @@ describe StaticMatic::Builder do
     @staticmatic.logger = mock("logger")
     @staticmatic.logger.should_receive(:info).at_least(:once)
     
+    # Replace with rubigen
     StaticMatic::Creator.setup(@root_dir)
     StaticMatic::Builder.build(@staticmatic)
   end

@@ -1,12 +1,17 @@
 #!/usr/bin/env ruby
 
-require File.dirname(__FILE__) + '/../lib/staticmatic'
+require 'rubygems'
+require 'rubigen'
 
-directory = ARGV[0]
-
-if !directory
-  puts "Usage: #{$0} <directory>"
-  exit
+if %w(-v --version).include? ARGV.first
+  require 'staticmatic/version'
+  puts "#{File.basename($0)} #{Staticmatic::VERSION::STRING}"
+  exit(0)
 end
 
-StaticMatic::Creator.setup(directory)
+require 'rubigen/scripts/generate'
+source = RubiGen::PathSource.new(:application, 
+  File.join(File.dirname(__FILE__), "../app_generators"))
+RubiGen::Base.reset_sources
+RubiGen::Base.append_sources source
+RubiGen::Scripts::Generate.new.run(ARGV, :generator => 'staticmatic')
