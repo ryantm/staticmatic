@@ -10,7 +10,7 @@ require 'staticmatic/autoload'
 require 'staticmatic/base'
 
 # Load template handlers
-Dir['lib/staticmatic/template_handlers/*.rb'].each do |handler|
+Dir[File.dirname(__FILE__) + '/staticmatic/template_handlers/*.rb'].each do |handler|
   begin
     require "staticmatic/template_handlers/#{File.basename(handler)}"
   rescue
