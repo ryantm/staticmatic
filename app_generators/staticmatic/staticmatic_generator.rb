@@ -3,7 +3,7 @@ class StaticmaticGenerator < RubiGen::Base
   DEFAULT_SHEBANG = File.join(Config::CONFIG['bindir'],
                               Config::CONFIG['ruby_install_name'])
 
-  default_options :author => nil
+  default_options :template => nil
 
   attr_reader :name
 
@@ -51,9 +51,8 @@ EOS
       opts.separator 'Options:'
       # For each option below, place the default
       # at the top of the file next to "default_options"
-      # opts.on("-a", "--author=\"Your Name\"", String,
-      #         "Some comment about this option",
-      #         "Default: none") { |options[:author]| }
+      opts.on("-t", "--template=\"Your Template Directory\"", String,
+              "Use a custom template for this project") { |options[:template]| }
       opts.on("-v", "--version", "Show the #{File.basename($0)} version number and quit.")
     end
 
@@ -61,7 +60,7 @@ EOS
       # for each option, extract it into a local variable (and create an "attr_reader :author" at the top)
       # Templates can access these value via the attr_reader-generated methods, but not the
       # raw instance variable value.
-      # @author = options[:author]
+      @source_root = File.expand_path(options[:template]) if options[:template]
     end
 
     # Installation skeleton.  Intermediate directories are automatically
