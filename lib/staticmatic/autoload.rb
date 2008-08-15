@@ -7,9 +7,11 @@ module StaticMatic
   
   module Helpers
     autoload :AssetTagHelper,    'staticmatic/helpers/asset_tag_helper'
-    autoload :DeprecatedHelpers, 'staticmatic/helpers/deprecated_helpers'
     autoload :PageHelper,        'staticmatic/helpers/page_helper'
     autoload :UrlHelper,         'staticmatic/helpers/url_helper'
+  end
+  
+  module TemplateHandlers
   end
 end
 

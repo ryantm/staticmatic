@@ -1,12 +1,8 @@
 require 'redcloth'
 
-module StaticMatic
-  module TemplateHandlers
-    class Textile < ActionView::TemplateHandler
-      def render(template, local_assigns = {})
-        ::RedCloth::new(template.source).to_html
-      end
-    end
+class StaticMatic::TemplateHandlers::Textile < ActionView::TemplateHandler
+  def render(template, local_assigns = {})
+    ::RedCloth::new(template.source).to_html
   end
 end
 
