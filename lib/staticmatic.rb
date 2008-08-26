@@ -13,7 +13,7 @@ require 'staticmatic/base'
 Dir[File.dirname(__FILE__) + '/staticmatic/template_handlers/*.rb'].each do |handler|
   begin
     require "staticmatic/template_handlers/#{File.basename(handler)}"
-  rescue
+  rescue LoadError
     # Could not load gem or handler
   end
 end

@@ -26,14 +26,11 @@ class StaticmaticGenerator < RubiGen::Base
         m.directory path
         m.folder path, path
       end
-
-      # m.template "template.rb",  "some_file_after_erb.rb"
-      # m.template_copy_each ["Rakefile"]
-      # m.file     "file",         "some_file_copied"
-
-      # Rubigen script/generate
-      # m.dependency "install_rubigen_scripts", [destination_root, 'staticmatic'],
-      #  :shebang => options[:shebang], :collision => :force
+      
+      m.directory "script"
+      %w(server).each do |file|
+        m.template "script/#{file}", "script/#{file}", :chmod => 0755
+      end
     end
   end
 
