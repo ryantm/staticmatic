@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name     = "staticmatic"
-  s.version  = "2.1.0"
-  s.date     = "2008-08-15"
+  s.version  = "2.1.1"
+  s.date     = "2008-09-05"
   s.authors  = ["Stephen Bartholomew", "Thomas Reynolds"]
   s.email    = "tdreyno@gmail.com"
   s.homepage = "http://github.com/tdreyno/staticmatic"
@@ -9,12 +9,6 @@ Gem::Specification.new do |s|
   s.files    = ["LICENSE",
                 "Rakefile",
                 "staticmatic.gemspec",
-                "app_generators/staticmatic/staticmatic_generator.rb",
-                "app_generators/staticmatic/templates/Rakefile",
-                "app_generators/staticmatic/templates/src/helpers/site_helper.rb",
-                "app_generators/staticmatic/templates/src/layouts/site.html.haml",
-                "app_generators/staticmatic/templates/src/pages/index.html.haml",
-                "app_generators/staticmatic/templates/src/stylesheets/site.css.sass",
                 "bin/staticmatic",
                 "lib/staticmatic.rb",
                 "lib/staticmatic/autoload.rb",
@@ -36,7 +30,12 @@ Gem::Specification.new do |s|
                 "lib/staticmatic/template_handlers/textile.rb",
                 "lib/staticmatic/templates/rescues/default_error.html.erb",
                 "lib/staticmatic/templates/rescues/template_error.html.erb",
-                "lib/tasks/staticmatic.rb",
+                "lib/templates/script/server",
+                "lib/templates/script/builder",
+                "lib/templates/src/helpers/site_helper.rb",
+                "lib/templates/src/layouts/site.html.haml",
+                "lib/templates/src/pages/index.html.haml",
+                "lib/templates/src/stylesheets/site.css.sass",
                 "vendor/html-scanner/html/document.rb",
                 "vendor/html-scanner/html/node.rb",
                 "vendor/html-scanner/html/sanitizer.rb",
@@ -44,7 +43,7 @@ Gem::Specification.new do |s|
                 "vendor/html-scanner/html/tokenizer.rb",
                 "vendor/html-scanner/html/version.rb"]
   s.executables = %w(staticmatic)
-  s.add_dependency("rubigen")
+  s.add_dependency("templater")
   s.add_dependency("mongrel")
   s.add_dependency("haml",          ">=2.0.1")
   s.add_dependency("actionpack",    ">=2.1.0")

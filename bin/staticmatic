@@ -1,16 +1,35 @@
 #!/usr/bin/env ruby
 
 require 'rubygems'
-require 'rubigen'
+require 'templater'
 
-if %w(-v --version).include? ARGV.first
-  require 'staticmatic/version'
-  puts "#{File.basename($0)} #{Staticmatic::VERSION::STRING}"
-  exit(0)
+module StaticMatic
+  module Generators
+    extend Templater::Manifold
+    desc "Generators for streamlining staticmatic"
+
+    class StaticmaticGenerator < Templater::Generator
+      def self.source_root
+        #options[:template]
+        File.join(File.dirname(__FILE__), '../lib/templates')
+      end
+
+      #option :template, :default => File.join(File.dirname(__FILE__), '../app_generators/staticmatic/templates'), :desc => "Use a custom template for this project"
+
+      desc <<-DESC
+       Creates a new staticmatic scaffold.
+      DESC
+
+      glob!
+
+      first_argument :name, :required => true, :desc => "Project name"
+      def destination_root
+        File.join(@destination_root, name)
+      end
+    end
+
+    add :setup, StaticmaticGenerator
+  end
 end
 
-require 'rubigen/scripts/generate'
-source = RubiGen::PathSource.new(:application, File.join(File.dirname(__FILE__), "..", "app_generators"))
-RubiGen::Base.reset_sources
-RubiGen::Base.append_sources source
-RubiGen::Scripts::Generate.new.run(ARGV, :generator => 'staticmatic')
+StaticMatic::Generators.run_cli(Dir.pwd, 'staticmatic', 1, ARGV)
