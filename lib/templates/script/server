@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
+require 'rubygems'
 require 'staticmatic'
 StaticMatic::Previewer.start(File.dirname(__FILE__) + "../")
